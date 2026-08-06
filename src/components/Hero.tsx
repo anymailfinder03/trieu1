@@ -16,55 +16,45 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1c1612]/30 via-transparent to-[#1c1612]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1c1612]/50 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1c1612]/60 via-[#1c1612]/10 to-transparent" />
       </div>
 
-      {/* Hero content — editorial left-aligned block, revealed after intro */}
+      {/* Hero content — editorial left block, revealed after intro */}
       <div
         id="hero-content"
-        className="absolute inset-0 z-20 h-full flex flex-col justify-end pb-20 pl-5 md:pl-16 pr-5 md:pr-[35%] max-w-[1400px] mx-auto pointer-events-none"
+        className="absolute inset-0 z-20 h-full flex flex-col justify-end pointer-events-none"
       >
-        <p
-          className="hero-content-item text-white/80 text-[11px] md:text-[12px] uppercase tracking-[0.3em] mb-6"
-          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-        >
-          SS / 26 — Bộ Sưu Tập 001
-        </p>
-
-        <h2
-          id="hero-heading"
-          className="hero-content-item text-white tracking-tight leading-[0.95] mb-6"
-          style={{
-            fontFamily: "'Newsreader', serif",
-            fontSize: 'clamp(48px, 9vw, 128px)',
-            lineHeight: 1,
-            fontWeight: 300,
-            letterSpacing: '-0.01em',
-          }}
-        >
-          Triệu Tóc Đẹp
-        </h2>
-
-        <p
-          className="hero-content-item text-white/70 max-w-md text-[15px] md:text-[16px] leading-[1.7] mb-10"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
-          Tiêu chuẩn mới trong nghệ thuật tạo mẫu tóc. Cắt tỉa chính xác, màu tóc đa chiều, và các liệu trình chăm sóc được thiết kế riêng cho từng khách hàng — bởi những nhà tạo mẫu coi mỗi mái tóc như một tác phẩm.
-        </p>
-
-        <div className="hero-content-item flex flex-col sm:flex-row gap-4 items-start pointer-events-auto">
-          <button
-            className="text-[#1c1612] bg-white px-8 py-4 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+        {/* Inner column: fixed left margin, fixed max-width so text wraps at ~40% screen */}
+        <div className="pb-20 pl-12 md:pl-20 lg:pl-28" style={{ maxWidth: '42%', minWidth: 320 }}>
+          <h2
+            id="hero-heading"
+            className="hero-content-item text-white tracking-tight mb-8"
+            style={{
+              fontFamily: "'Newsreader', serif",
+              fontSize: 'clamp(48px, 9vw, 128px)',
+              lineHeight: 1,
+              fontWeight: 300,
+              letterSpacing: '-0.01em',
+            }}
           >
-            Đặt Lịch Hẹn
-          </button>
-          <button
-            className="text-white border border-white/30 px-8 py-4 hover:bg-white/10 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            Triệu Tóc Đẹp
+          </h2>
+
+          <p
+            className="hero-content-item text-white/65 text-[14px] md:text-[15px] leading-[1.8] mb-10"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            Xem Lookbook
-          </button>
+            Tiêu chuẩn mới trong nghệ thuật tạo mẫu tóc. Cắt tỉa chính xác, màu tóc đa chiều, và các liệu trình chăm sóc được thiết kế riêng cho từng khách hàng — bởi những nhà tạo mẫu coi mỗi mái tóc như một tác phẩm.
+          </p>
+
+          <div className="hero-content-item pointer-events-auto">
+            <button
+              className="text-[#1c1612] bg-white px-8 py-4 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95"
+              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            >
+              Đặt Lịch Hẹn
+            </button>
+          </div>
         </div>
       </div>
 

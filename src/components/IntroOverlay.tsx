@@ -103,21 +103,23 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
       ref={overlayRef}
       className="intro-overlay fixed inset-0 z-[100] bg-[#e8dcc8]"
     >
-      {/* Salon name — positioned exactly where the Hero heading lives so it never moves */}
-      <div className="absolute inset-0 flex flex-col justify-end pb-20 pl-5 md:pl-16 pr-5 md:pr-[35%] max-w-[1400px] mx-auto pointer-events-none">
-        <h1
-          ref={titleRef}
-          className="intro-title text-[#2a221c] tracking-tight"
-          style={{
-            fontFamily: "'Newsreader', serif",
-            fontSize: 'clamp(48px, 9vw, 128px)',
-            lineHeight: 1,
-            fontWeight: 300,
-            letterSpacing: '-0.01em',
-          }}
-        >
-          Triệu Tóc Đẹp
-        </h1>
+      {/* Salon name — same position/size/padding as Hero heading so it never moves */}
+      <div className="absolute inset-0 flex flex-col justify-end pointer-events-none">
+        <div className="pb-20 pl-12 md:pl-20 lg:pl-28" style={{ maxWidth: '42%', minWidth: 320 }}>
+          <h1
+            ref={titleRef}
+            className="intro-title text-[#2a221c] tracking-tight"
+            style={{
+              fontFamily: "'Newsreader', serif",
+              fontSize: 'clamp(48px, 9vw, 128px)',
+              lineHeight: 1,
+              fontWeight: 300,
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Triệu Tóc Đẹp
+          </h1>
+        </div>
       </div>
 
       {/* The Frame — sharp rectangle, no border-radius, expands to fullscreen */}

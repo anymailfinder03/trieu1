@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const links = ['Collections', 'Services', 'Lookbook', 'About', 'Contact'];
+const links = ['Bộ Sưu Tập', 'Dịch Vụ', 'Lookbook', 'Về Chúng Tôi', 'Liên Hệ'];
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function Nav() {
     <>
       <nav
         style={{ fontFamily: "'JetBrains Mono', monospace" }}
-        className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5 md:px-16 py-6 bg-[#131313]/80 backdrop-blur-xl border-b border-white/10 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5 md:px-16 py-6 bg-[#1c1612]/80 backdrop-blur-xl border-b border-white/10 transition-all duration-300"
       >
         {/* Logo */}
         <div>
@@ -38,8 +38,8 @@ export default function Nav() {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <button className="text-[#2f3132] bg-white px-6 py-3 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95">
-            BOOK NOW
+          <button className="text-[#1c1612] bg-white px-6 py-3 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95">
+            ĐẶT LỊCH
           </button>
         </div>
 
@@ -47,7 +47,7 @@ export default function Nav() {
         <button
           className="md:hidden text-white"
           onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Toggle menu"
+          aria-label="Mở menu"
         >
           {mobileOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -55,7 +55,7 @@ export default function Nav() {
 
       {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 bg-[#131313]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 pt-24">
+        <div className="fixed inset-0 z-40 bg-[#1c1612]/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 pt-24">
           {links.map((link) => (
             <a
               key={link}
@@ -68,10 +68,10 @@ export default function Nav() {
             </a>
           ))}
           <button
-            className="mt-4 text-[#2f3132] bg-white px-8 py-4 uppercase tracking-[0.15em] text-[12px] font-medium"
+            className="mt-4 text-[#1c1612] bg-white px-8 py-4 uppercase tracking-[0.15em] text-[12px] font-medium"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
-            BOOK NOW
+            ĐẶT LỊCH
           </button>
         </div>
       )}

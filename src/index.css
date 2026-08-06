@@ -2,7 +2,21 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Colors */
+  /* Warm Luxury Palette */
+  --color-cream: #f5efe6;
+  --color-champagne: #e8dcc8;
+  --color-ivory: #faf6f0;
+  --color-beige: #d9c9b3;
+  --color-warm-dark: #2a221c;
+  --color-warm-darker: #1c1612;
+  --color-espresso: #3d2f24;
+  --color-gold: #c9a96e;
+  --color-rose: #c89b8c;
+  --color-mauve: #a08a7e;
+  --color-text-warm: #4a3f35;
+  --color-text-soft: #7a6b5d;
+
+  /* Original dark palette (kept for lower sections) */
   --color-background: #131313;
   --color-surface: #131313;
   --color-surface-dim: #131313;
@@ -87,41 +101,36 @@ body {
 }
 
 ::selection {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(201, 169, 110, 0.3);
   color: #ffffff;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Hero intro — initial states set by GSAP, these are fallbacks */
+.hero-intro-overlay {
+  will-change: opacity, transform;
+}
+
+.hero-intro-title {
+  will-change: opacity, transform;
+}
+
+.hero-image-container {
+  will-change: clip-path, transform;
+  transform-origin: center center;
+}
+
+.hero-image-inner {
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.hero-content-item {
+  will-change: opacity, transform;
 }
 
 @keyframes scrollPulse {
   0%, 100% { opacity: 0.2; transform: scaleY(1); }
   50% { opacity: 0.8; transform: scaleY(1.1); }
-}
-
-.animate-fade-in-up-1 {
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 0.2s forwards;
-}
-.animate-fade-in-up-2 {
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 0.45s forwards;
-}
-.animate-fade-in-up-3 {
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 0.7s forwards;
-}
-.animate-fade-in-up-4 {
-  opacity: 0;
-  animation: fadeInUp 1s ease-out 0.95s forwards;
 }
 
 .scroll-line {

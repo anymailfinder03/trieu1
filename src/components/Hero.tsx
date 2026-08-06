@@ -36,27 +36,23 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         className="absolute inset-0 z-20 h-full flex flex-col justify-end pointer-events-none"
       >
         <div
-          className="pb-20 pl-12 md:pl-20 lg:pl-28"
+          className="pl-12 md:pl-20 lg:pl-28 pb-20"
           style={{ maxWidth: '42%', minWidth: 320 }}
         >
-          {/* Title space — reserved by padding-top on the description wrapper,
-              not by a fake element. The title itself renders in PersistentTitle. */}
-          <div className="pt-[calc(clamp(48px,9vw,128px)*2+2rem)]">
-            <p
-              className="hero-content-item text-white/65 text-[14px] md:text-[15px] leading-[1.8] mb-10"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
-              Tiêu chuẩn mới trong nghệ thuật tạo mẫu tóc. Cắt tỉa chính xác, màu tóc đa chiều, và các liệu trình chăm sóc được thiết kế riêng cho từng khách hàng — bởi những nhà tạo mẫu coi mỗi mái tóc như một tác phẩm.
-            </p>
+          <p
+            className="hero-content-item text-white/65 text-[14px] md:text-[15px] leading-[1.8] mb-10"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+          >
+            Tiêu chuẩn mới trong nghệ thuật tạo mẫu tóc. Cắt tỉa chính xác, màu tóc đa chiều, và các liệu trình chăm sóc được thiết kế riêng cho từng khách hàng — bởi những nhà tạo mẫu coi mỗi mái tóc như một tác phẩm.
+          </p>
 
-            <div className="hero-content-item pointer-events-auto">
-              <button
-                className="text-[#1c1612] bg-white px-8 py-4 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                Đặt Lịch Hẹn
-              </button>
-            </div>
+          <div className="hero-content-item pointer-events-auto">
+            <button
+              className="text-[#1c1612] bg-white px-8 py-4 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95"
+              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+            >
+              Đặt Lịch Hẹn
+            </button>
           </div>
         </div>
       </div>

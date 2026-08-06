@@ -4,7 +4,10 @@ const PersistentTitle = () => {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-[90] flex flex-col justify-end"
     >
-      <div className="pb-20 pl-12 md:pl-20 lg:pl-28" style={{ maxWidth: '42%', minWidth: 320 }}>
+      <div
+        className="pl-12 md:pl-20 lg:pl-28"
+        style={{ maxWidth: '42%', minWidth: 320, paddingBottom: '24rem' }}
+      >
         <h1
           className="text-white tracking-tight"
           style={{

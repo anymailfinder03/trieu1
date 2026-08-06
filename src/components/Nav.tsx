@@ -10,7 +10,7 @@ export default function Nav() {
     <>
       <nav
         style={{ fontFamily: "'JetBrains Mono', monospace" }}
-        className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5 md:px-16 py-6 bg-[#1c1612]/80 backdrop-blur-xl border-b border-white/10 transition-all duration-300"
+        className="fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-5 md:px-16 py-6 bg-[#1c1612]/80 backdrop-blur-xl border-b border-white/10 transition-all duration-300"
       >
         {/* Logo */}
         <div>

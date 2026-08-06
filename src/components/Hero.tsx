@@ -2,13 +2,21 @@ import { forwardRef } from 'react';
 
 const HERO_IMG = 'https://ik.imagekit.io/zznoau6lx/Hair%20demo%201/2026-08-06_07-24-22_Lumina_1.jpg';
 
+/**
+ * The Hero is always mounted — from frame one. It is never faded in,
+ * never swapped, never replaced. The IntroOverlay simply reveals it.
+ *
+ * The title is NOT part of this layout. It lives in PersistentTitle as an
+ * independent fixed layer. The description/CTA/scroll are positioned
+ * independently so they don't depend on the title's height.
+ */
 const Hero = forwardRef<HTMLElement>((_props, ref) => {
   return (
     <section
       ref={ref}
       className="relative h-screen min-h-[700px] w-full overflow-hidden bg-[#1c1612]"
     >
-      {/* Static background image — never animated */}
+      {/* ── Hero background (frame one, always present) ── */}
       <div className="absolute inset-0">
         <img
           src={HERO_IMG}
@@ -19,43 +27,41 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1c1612]/60 via-[#1c1612]/10 to-transparent" />
       </div>
 
-      {/* Hero content — editorial left block, revealed after intro.
-          Title is rendered by PersistentTitle in App; a spacer preserves layout parity. */}
+      {/* ── Description + CTA ──
+          Positioned independently of the title. The top padding reserves
+          the editorial space the title occupies visually above it, so the
+          composition matches the original Hero without a spacer div. */}
       <div
         id="hero-content"
         className="absolute inset-0 z-20 h-full flex flex-col justify-end pointer-events-none"
       >
-        <div className="pb-20 pl-12 md:pl-20 lg:pl-28" style={{ maxWidth: '42%', minWidth: 320 }}>
-          <div
-            aria-hidden="true"
-            className="mb-8"
-            style={{
-              fontFamily: "'Newsreader', serif",
-              fontSize: 'clamp(48px, 9vw, 128px)',
-              lineHeight: 1,
-              height: 'calc(clamp(48px, 9vw, 128px) * 2)',
-            }}
-          />
-
-          <p
-            className="hero-content-item text-white/65 text-[14px] md:text-[15px] leading-[1.8] mb-10"
-            style={{ fontFamily: "'Inter', sans-serif" }}
-          >
-            Tiêu chuẩn mới trong nghệ thuật tạo mẫu tóc. Cắt tỉa chính xác, màu tóc đa chiều, và các liệu trình chăm sóc được thiết kế riêng cho từng khách hàng — bởi những nhà tạo mẫu coi mỗi mái tóc như một tác phẩm.
-          </p>
-
-          <div className="hero-content-item pointer-events-auto">
-            <button
-              className="text-[#1c1612] bg-white px-8 py-4 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95"
-              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+        <div
+          className="pb-20 pl-12 md:pl-20 lg:pl-28"
+          style={{ maxWidth: '42%', minWidth: 320 }}
+        >
+          {/* Title space — reserved by padding-top on the description wrapper,
+              not by a fake element. The title itself renders in PersistentTitle. */}
+          <div className="pt-[calc(clamp(48px,9vw,128px)*2+2rem)]">
+            <p
+              className="hero-content-item text-white/65 text-[14px] md:text-[15px] leading-[1.8] mb-10"
+              style={{ fontFamily: "'Inter', sans-serif" }}
             >
-              Đặt Lịch Hẹn
-            </button>
+              Tiêu chuẩn mới trong nghệ thuật tạo mẫu tóc. Cắt tỉa chính xác, màu tóc đa chiều, và các liệu trình chăm sóc được thiết kế riêng cho từng khách hàng — bởi những nhà tạo mẫu coi mỗi mái tóc như một tác phẩm.
+            </p>
+
+            <div className="hero-content-item pointer-events-auto">
+              <button
+                className="text-[#1c1612] bg-white px-8 py-4 hover:bg-white/90 transition-colors duration-300 uppercase tracking-[0.15em] text-[12px] font-medium active:scale-95"
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                Đặt Lịch Hẹn
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* ── Scroll indicator ── */}
       <div
         id="hero-scroll"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2"
@@ -71,7 +77,7 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         </div>
       </div>
 
-      {/* Side label */}
+      {/* ── Side label ── */}
       <div className="absolute right-4 top-1/2 -translate-y-1/2 z-20 hidden lg:block">
         <p
           className="text-white/30 text-[10px] uppercase tracking-[0.3em] rotate-90 origin-center whitespace-nowrap"

@@ -1,70 +1,85 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import gsap from 'gsap';
 
 interface IntroOverlayProps {
   onComplete: () => void;
 }
 
+const CHAMPAGNE = '#e8dcc8';
+
+/**
+ * A cinematic mask — not an animation layer.
+ *
+ * The Hero is always mounted underneath. This overlay hides it with four
+ * champagne panels arranged around a central rectangular "window".
+ * As the window expands, the panels shrink and reveal the real Hero below.
+ *
+ *   ┌──────────────────────┐
+ *   │         TOP           │
+ *   ├──────┐        ┌──────┤
+ *   │ LEFT │ WINDOW │ RIGHT│
+ *   ├──────┘        └──────┤
+ *   │        BOTTOM        │
+ *   └──────────────────────┘
+ *
+ * No image lives here. No duplicate of the Hero. The window is just a gap.
+ */
 export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef<HTMLDivElement>(null);
+  const topRef = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
   const [removed, setRemoved] = useState(false);
+
+  const handleComplete = useCallback(() => {
+    setRemoved(true);
+    onComplete();
+  }, [onComplete]);
 
   useEffect(() => {
     if (removed) return;
 
     const ctx = gsap.context(() => {
-      // Initial states — set before paint to avoid flash
+      // Frame 1 — panels fully cover the screen, window is a thin slit.
       gsap.set(overlayRef.current, { opacity: 1 });
-      gsap.set(frameRef.current, {
-        opacity: 0,
-        scale: 0.92,
-        width: '20vw',
-        height: '25vw',
-        maxWidth: 380,
-      });
+      gsap.set(topRef.current, { height: '49vh' });
+      gsap.set(bottomRef.current, { height: '49vh' });
+      gsap.set(leftRef.current, { width: '46vw' });
+      gsap.set(rightRef.current, { width: '46vw' });
 
       const tl = gsap.timeline({
-        defaults: { ease: 'power4.out' },
-        onComplete: () => {
-          setRemoved(true);
-          onComplete();
-        },
+        defaults: { ease: 'power3.inOut' },
+        onComplete: handleComplete,
       });
 
-      tl
-        // ── Phase 1: Frame Reveal ──
-        .to(frameRef.current, {
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          ease: 'power3.out',
-        }, 'frameReveal')
+      // Frame 2 — a small portrait rectangle appears in the center.
+      tl.to(
+        [topRef.current, bottomRef.current],
+        { height: '40vh', duration: 0.7, ease: 'power2.out' },
+        0
+      ).to(
+        [leftRef.current, rightRef.current],
+        { width: '35vw', duration: 0.7, ease: 'power2.out' },
+        0
+      );
 
-        // ── Phase 2: Frame Expansion — the window grows to reveal the Hero underneath ──
-        .to(frameRef.current, {
-          width: '100vw',
-          height: '100vh',
-          maxWidth: '100vw',
-          duration: 1.6,
-          ease: 'power3.inOut',
-        }, 'frameExpand')
+      // Frame 3 — the rectangle expands to fullscreen.
+      tl.to(topRef.current, { height: '0vh', duration: 1.4 }, 0.7)
+        .to(bottomRef.current, { height: '0vh', duration: 1.4 }, 0.7)
+        .to(leftRef.current, { width: '0vw', duration: 1.4 }, 0.7)
+        .to(rightRef.current, { width: '0vw', duration: 1.4 }, 0.7);
 
-        // ── Phase 3: Overlay fades out — champagne disappears, only Hero remains ──
-        .to(overlayRef.current, {
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        }, 'overlayOut');
-
-      // Labels
-      tl.addLabel('frameReveal', 0);
-      tl.addLabel('frameExpand', 0.9);
-      tl.addLabel('overlayOut', 2.4);
+      // Frame 4 — overlay fades away once the Hero is fully revealed.
+      tl.to(
+        overlayRef.current,
+        { opacity: 0, duration: 0.5, ease: 'power2.out' },
+        '+=0.05'
+      );
     }, overlayRef);
 
     return () => ctx.revert();
-  }, [removed, onComplete]);
+  }, [removed, handleComplete]);
 
   if (removed) return null;
 
@@ -72,20 +87,37 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
     <div
       ref={overlayRef}
       className="intro-overlay fixed inset-0 z-[80] overflow-hidden"
-      style={{ backgroundColor: '#e8dcc8' }}
     >
-      {/* The Frame — a transparent window. Its box-shadow casts the champagne
-          color outward in every direction, hiding everything outside the window.
-          As the frame grows, the window reveals the real Hero underneath. */}
+      {/* TOP — covers everything above the window */}
       <div
-        ref={frameRef}
-        className="intro-frame absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+        ref={topRef}
+        className="absolute left-0 top-0 w-full"
+        style={{ backgroundColor: CHAMPAGNE }}
+      />
+      {/* BOTTOM — covers everything below the window */}
+      <div
+        ref={bottomRef}
+        className="absolute left-0 bottom-0 w-full"
+        style={{ backgroundColor: CHAMPAGNE }}
+      />
+      {/* LEFT — covers the left side of the window band */}
+      <div
+        ref={leftRef}
+        className="absolute left-0"
         style={{
-          width: '20vw',
-          maxWidth: 380,
-          aspectRatio: '4 / 5',
-          backgroundColor: 'transparent',
-          boxShadow: '0 0 0 100vmax #e8dcc8',
+          top: '40vh',
+          height: '20vh',
+          backgroundColor: CHAMPAGNE,
+        }}
+      />
+      {/* RIGHT — covers the right side of the window band */}
+      <div
+        ref={rightRef}
+        className="absolute right-0"
+        style={{
+          top: '40vh',
+          height: '20vh',
+          backgroundColor: CHAMPAGNE,
         }}
       />
     </div>

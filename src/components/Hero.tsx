@@ -37,8 +37,10 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
               letterSpacing: '-0.01em',
             }}
           >
-            Triệu Tóc Đẹp
-          </h2>
+  Triệu
+  <br />
+  Tóc Đẹp
+</h2>
 
           <p
             className="hero-content-item text-white/65 text-[14px] md:text-[15px] leading-[1.8] mb-10"

@@ -19,28 +19,23 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1c1612]/60 via-[#1c1612]/10 to-transparent" />
       </div>
 
-      {/* Hero content — editorial left block, revealed after intro */}
+      {/* Hero content — editorial left block, revealed after intro.
+          Title is rendered by PersistentTitle in App; a spacer preserves layout parity. */}
       <div
         id="hero-content"
         className="absolute inset-0 z-20 h-full flex flex-col justify-end pointer-events-none"
       >
-        {/* Inner column: fixed left margin, fixed max-width so text wraps at ~40% screen */}
         <div className="pb-20 pl-12 md:pl-20 lg:pl-28" style={{ maxWidth: '42%', minWidth: 320 }}>
-          <h2
-            id="hero-heading"
-            className="hero-content-item text-white tracking-tight mb-8"
+          <div
+            aria-hidden="true"
+            className="mb-8"
             style={{
               fontFamily: "'Newsreader', serif",
               fontSize: 'clamp(48px, 9vw, 128px)',
               lineHeight: 1,
-              fontWeight: 300,
-              letterSpacing: '-0.01em',
+              height: 'calc(clamp(48px, 9vw, 128px) * 2)',
             }}
-          >
-  Triệu
-  <br />
-  Tóc Đẹp
-</h2>
+          />
 
           <p
             className="hero-content-item text-white/65 text-[14px] md:text-[15px] leading-[1.8] mb-10"

@@ -110,17 +110,8 @@ body {
   will-change: opacity;
 }
 
-.intro-title {
-  will-change: opacity, transform;
-}
-
 .intro-frame {
-  will-change: width, height, border-radius, transform, opacity;
-  transform-origin: center center;
-}
-
-.intro-frame img {
-  will-change: transform;
+  will-change: width, height, transform, opacity;
   transform-origin: center center;
 }
 

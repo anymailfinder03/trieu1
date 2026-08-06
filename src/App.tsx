@@ -3,17 +3,19 @@ import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import Teaser from '@/components/Teaser';
 import IntroOverlay from '@/components/IntroOverlay';
+import PersistentTitle from '@/components/PersistentTitle';
 import gsap from 'gsap';
 
 function App() {
   const heroRef = useRef<HTMLElement>(null);
   const [introDone, setIntroDone] = useState(false);
 
-  // Reveal hero content after intro overlay disappears
+  // Reveal hero supporting content after intro overlay disappears.
+  // The title is never animated — it has been visible since the first frame.
   useEffect(() => {
     if (!introDone) return;
 
-    const content = heroRef.current?.querySelectorAll('#hero-content > .hero-content-item');
+    const content = heroRef.current?.querySelectorAll('#hero-content .hero-content-item');
     const scroll = heroRef.current?.querySelector('#hero-scroll');
 
     if (!content || content.length === 0) return;
@@ -46,6 +48,10 @@ function App() {
         <Hero ref={heroRef} />
         <Teaser />
       </main>
+
+      {/* Persistent editorial title — above the Hero, beneath the nav.
+          Never animates. Visible from the first frame. */}
+      <PersistentTitle />
 
       {!introDone && <IntroOverlay onComplete={() => setIntroDone(true)} />}
     </div>

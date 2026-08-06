@@ -105,21 +105,21 @@ body {
   color: #ffffff;
 }
 
-/* Hero intro — initial states set by GSAP, these are fallbacks */
-.hero-intro-overlay {
+/* Intro Overlay — animated by GSAP, these are fallbacks */
+.intro-overlay {
+  will-change: opacity;
+}
+
+.intro-title {
   will-change: opacity, transform;
 }
 
-.hero-intro-title {
-  will-change: opacity, transform;
-}
-
-.hero-image-container {
-  will-change: clip-path, transform;
+.intro-frame {
+  will-change: width, height, border-radius, transform, opacity;
   transform-origin: center center;
 }
 
-.hero-image-inner {
+.intro-frame img {
   will-change: transform;
   transform-origin: center center;
 }

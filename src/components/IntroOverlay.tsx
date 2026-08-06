@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 
-const HERO_IMG = 'https://ik.imagekit.io/zznoau6lx/Hair%20demo%201/2026-08-06_07-24-22_Lumina_1.jpg';
+const HERO_IMG = 'https://ik.imagekit.io/zznoau6lx/Hair%20demo%201/2026-08-05_23-53-09_Lumina_1.jpg';
 
 interface IntroOverlayProps {
   onComplete: () => void;
@@ -9,7 +9,7 @@ interface IntroOverlayProps {
 
 export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const [removed, setRemoved] = useState(false);
@@ -20,14 +20,14 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
     const ctx = gsap.context(() => {
       // Initial states — set before paint to avoid flash
       gsap.set(overlayRef.current, { opacity: 1 });
-      gsap.set(titleRef.current, { opacity: 0, y: 30, scale: 0.96 });
+      gsap.set(titleRef.current, { opacity: 0, scale: 0.97 });
       gsap.set(frameRef.current, {
         opacity: 0,
         scale: 0.92,
         width: '20vw',
         height: '25vw',
         maxWidth: 380,
-        borderRadius: 20,
+        borderRadius: 0,
       });
       gsap.set(imageRef.current, { scale: 1.15 });
 
@@ -40,10 +40,9 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
       });
 
       tl
-        // ── Phase 1: Title Reveal ──
+        // ── Phase 1: Title Reveal — opacity + subtle scale only, no movement ──
         .to(titleRef.current, {
           opacity: 1,
-          y: 0,
           scale: 1,
           duration: 1.2,
           ease: 'power4.out',
@@ -57,13 +56,11 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
           ease: 'power3.out',
         }, 'frameReveal')
 
-        // ── Phase 3: Frame Expansion ──
-        // Container grows to fullscreen, border-radius → 0
+        // ── Phase 3: Frame Expansion — width/height only, no border-radius change ──
         .to(frameRef.current, {
           width: '100vw',
           height: '100vh',
           maxWidth: '100vw',
-          borderRadius: 0,
           duration: 1.6,
           ease: 'power3.inOut',
         }, 'frameExpand')
@@ -104,21 +101,13 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
   return (
     <div
       ref={overlayRef}
-      className="intro-overlay fixed inset-0 z-[100] flex items-center justify-center bg-[#e8dcc8]"
+      className="intro-overlay fixed inset-0 z-[100] bg-[#e8dcc8]"
     >
-      {/* Salon name — sits above the frame */}
-      <div
-        ref={titleRef}
-        className="intro-title absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10 pointer-events-none"
-      >
-        <p
-          className="text-[#7a6b5d] text-[10px] md:text-[11px] uppercase tracking-[0.4em] mb-6"
-          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-        >
-          Salon Tóc Cao Cấp
-        </p>
+      {/* Salon name — positioned exactly where the Hero heading lives so it never moves */}
+      <div className="absolute inset-0 flex flex-col justify-end pb-20 pl-5 md:pl-16 pr-5 md:pr-[35%] max-w-[1400px] mx-auto pointer-events-none">
         <h1
-          className="text-[#2a221c] tracking-tight"
+          ref={titleRef}
+          className="intro-title text-[#2a221c] tracking-tight"
           style={{
             fontFamily: "'Newsreader', serif",
             fontSize: 'clamp(48px, 9vw, 128px)',
@@ -127,21 +116,11 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
             letterSpacing: '-0.01em',
           }}
         >
-          Triệu Tóc Đép
+          Triệu Tóc Đẹp
         </h1>
-        <div className="flex items-center justify-center gap-4 mt-8">
-          <div className="w-12 h-px bg-[#c9a96e]" />
-          <span
-            className="text-[#c9a96e] text-[10px] uppercase tracking-[0.35em]"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            Sài Gòn
-          </span>
-          <div className="w-12 h-px bg-[#c9a96e]" />
-        </div>
       </div>
 
-      {/* The Frame — real DOM rectangle that expands to fullscreen */}
+      {/* The Frame — sharp rectangle, no border-radius, expands to fullscreen */}
       <div
         ref={frameRef}
         className="intro-frame absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden z-20"
@@ -149,7 +128,7 @@ export default function IntroOverlay({ onComplete }: IntroOverlayProps) {
           width: '20vw',
           maxWidth: 380,
           aspectRatio: '4 / 5',
-          borderRadius: 20,
+          borderRadius: 0,
         }}
       >
         <img

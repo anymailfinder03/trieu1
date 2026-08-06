@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 
-const HERO_IMG = 'https://ik.imagekit.io/zznoau6lx/Hair%20demo%201/2026-08-06_07-24-22_Lumina_1.jpg';
+const HERO_IMG = 'https://ik.imagekit.io/zznoau6lx/Hair%20demo%201/2026-08-05_23-53-09_Lumina_1.jpg';
 
 const Hero = forwardRef<HTMLElement>((_props, ref) => {
   return (
@@ -19,10 +19,10 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#1c1612]/50 via-transparent to-transparent" />
       </div>
 
-      {/* Hero content — revealed by IntroOverlay via onComplete */}
+      {/* Hero content — editorial left-aligned block, revealed after intro */}
       <div
         id="hero-content"
-        className="absolute inset-0 z-20 h-full flex flex-col justify-end pb-20 px-5 md:px-16 max-w-[1200px] mx-auto pointer-events-none"
+        className="absolute inset-0 z-20 h-full flex flex-col justify-end pb-20 pl-5 md:pl-16 pr-5 md:pr-[35%] max-w-[1400px] mx-auto pointer-events-none"
       >
         <p
           className="hero-content-item text-white/80 text-[11px] md:text-[12px] uppercase tracking-[0.3em] mb-6"
@@ -32,21 +32,21 @@ const Hero = forwardRef<HTMLElement>((_props, ref) => {
         </p>
 
         <h2
+          id="hero-heading"
           className="hero-content-item text-white tracking-tight leading-[0.95] mb-6"
           style={{
             fontFamily: "'Newsreader', serif",
-            fontSize: 'clamp(52px, 10vw, 140px)',
-            lineHeight: 'clamp(52px, 10vw, 140px)',
+            fontSize: 'clamp(48px, 9vw, 128px)',
+            lineHeight: 1,
             fontWeight: 300,
+            letterSpacing: '-0.01em',
           }}
         >
-          Tôn Vinh
-          <br />
-          Vẻ Đẹp Riêng
+          Triệu Tóc Đẹp
         </h2>
 
         <p
-          className="hero-content-item text-white/70 max-w-xl text-[15px] md:text-[16px] leading-[1.7] mb-10"
+          className="hero-content-item text-white/70 max-w-md text-[15px] md:text-[16px] leading-[1.7] mb-10"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           Tiêu chuẩn mới trong nghệ thuật tạo mẫu tóc. Cắt tỉa chính xác, màu tóc đa chiều, và các liệu trình chăm sóc được thiết kế riêng cho từng khách hàng — bởi những nhà tạo mẫu coi mỗi mái tóc như một tác phẩm.
